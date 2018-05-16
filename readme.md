@@ -60,6 +60,7 @@ deploy:
 ```
 
 # Travis API - triggering builds
+You can configure a hourly cron job via the 
 ```bash
 #!/bin/bash
 
