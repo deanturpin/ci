@@ -1,7 +1,15 @@
 # Travis config
-## GitHub API key
-Create a private environment variable "api_key" with your GitHub API key,
-this replaces the ```${api_key}``` in the configs below.
+## Deploying to GitHub Pages
+In the Travis repo settings create a private environment variable "api_key" containing your GitHub API key. This replaces the ```${api_key}``` below. All branches are built in Travis by default but in this example on the master branch will be deployed.
+
+```yaml
+deploy:
+  provider: pages
+  github-token: ${api_key}
+  skip-cleanup: true
+  on:
+    branch: master
+```
 
 ## C++
 ```yaml
