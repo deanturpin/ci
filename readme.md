@@ -1,6 +1,6 @@
 # Travis config
 ## Deploying to GitHub Pages
-In the Travis repo settings create a private environment variable "api_key" containing your GitHub API key. This replaces the ```${api_key}``` below. All branches are built in Travis by default but in this example on the master branch will be deployed.
+In the Travis repo settings create a private environment variable "api_key" containing your GitHub API key. This replaces the ```${api_key}``` below. All branches are built in Travis by default but in this example on the master branch will be deployed. Deploying for the first time will create a "gh-pages" branch and setup the username.github.io/repo static web page.
 
 ```yaml
 deploy:
