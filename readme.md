@@ -11,6 +11,15 @@ deploy:
     branch: master
 ```
 
+## C++ code coverage
+Login to http://codecov.io with your GitHub credentials and simply push your coverage files via Travis. Build your C++ using the gcc ```--coverage``` flag.
+
+```yaml
+script:
+  - make
+  - bash <(curl -s https://codecov.io/bash)
+```
+
 ## C++
 ```yaml
 dist: trusty
