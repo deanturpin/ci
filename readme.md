@@ -45,8 +45,6 @@ script:
   - make
   - bash <(curl -s https://codecov.io/bash)
 
-before_deploy: rm -f .gitignore
-
 deploy:
   provider: pages
   github-token: ${api_key}
