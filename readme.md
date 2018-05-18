@@ -60,7 +60,15 @@ deploy:
 ```
 
 # Travis API - triggering builds
-You can configure a hourly cron job via the 
+You can configure a hourly cron job via the Travis settings but for more
+frequent builds set up your own cron job on a Linux web server and use the
+Travis API.
+
+```bash
+# Travis
+@hourly nice ~/trigger.sh
+```
+
 ```bash
 #!/bin/bash
 
