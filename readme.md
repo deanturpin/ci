@@ -97,3 +97,7 @@ curl -s -X POST \
   -d "$body" \
   'https://api.travis-ci.org/repo/USERNAME%2FREPO/requests' >& /dev/null
 ```
+
+# References
+* https://docs.travis-ci.com/user/languages/cpp/
+* https://arne-mertz.de/2017/04/continuous-integration-travis-ci/
