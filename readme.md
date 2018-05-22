@@ -57,12 +57,6 @@ deploy:
 ```yaml
 script: make
 install: sudo apt install graphviz
-deploy:
-  provider: pages
-  github-token: ${api_key}
-  skip-cleanup: true
-  on:
-    branch: master
 ```
 
 ## Python with requests
