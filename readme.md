@@ -122,3 +122,7 @@ for file in $(git diff-index --cached --name-only HEAD); do
   fi
 done
 ```
+
+# References
+* https://docs.travis-ci.com/user/languages/cpp/
+* https://arne-mertz.de/2017/04/continuous-integration-travis-ci/
