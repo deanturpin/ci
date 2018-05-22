@@ -112,7 +112,8 @@ curl -s -X POST \
 
 # Clang format on pre-commit
 
-See [githooks](https://github.com/deanturpin/githooks).
+Global configuration to run clang-format on all C++ files as they are pushed to
+the server. See [githooks](https://github.com/deanturpin/githooks).
 
 ```bash
 for file in $(git diff-index --cached --name-only HEAD); do
