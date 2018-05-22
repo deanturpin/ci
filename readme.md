@@ -1,6 +1,6 @@
 See my [Travis builds](https://travis-ci.org/deanturpin).
 
-# Travis CI config
+# Travis CI - repo configuration
 ## Deploying to GitHub Pages
 In the Travis CI repo settings create a private environment variable "api_key"
 containing your GitHub API key. This replaces the ```${api_key}``` below. All
@@ -77,7 +77,7 @@ Also need to add ```requirements.txt``` containing a list of libraries:
 requests
 ```
 
-# Travis API - triggering builds
+# Travis CI - triggering builds using the API
 You can configure a hourly cron job via the Travis settings but for more
 frequent builds set up your own cron job on a Linux web server and use the
 Travis API. Note the .org in the API URL, if you use the wrong one (.com) it
