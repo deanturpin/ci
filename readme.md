@@ -65,6 +65,18 @@ deploy:
     branch: master
 ```
 
+## Python with requests
+```yaml
+language: python
+python: "3.5"
+script: make
+```
+
+Also need to add ```requirements.txt``` containing a list of libraries:
+```bash
+requests
+```
+
 # Travis API - triggering builds
 You can configure a hourly cron job via the Travis settings but for more
 frequent builds set up your own cron job on a Linux web server and use the
@@ -96,4 +108,17 @@ curl -s -X POST \
   -H "Authorization: token TOKEN" \
   -d "$body" \
   'https://api.travis-ci.org/repo/USERNAME%2FREPO/requests' >& /dev/null
+```
+
+# Clang format on pre-commit
+
+See [githooks](https://github.com/deanturpin/githooks).
+
+```bash
+for file in $(git diff-index --cached --name-only HEAD); do
+  if [[ $file == *.cpp || $file == *.h ]]; then
+    clang-format -i "$file"
+    git add "$file"
+  fi
+done
 ```
