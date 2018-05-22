@@ -44,13 +44,6 @@ addons:
 script:
   - make
   - bash <(curl -s https://codecov.io/bash)
-
-deploy:
-  provider: pages
-  github-token: ${api_key}
-  skip-cleanup: true
-  on:
-    branch: master
 ```
 
 ## bash with dot
