@@ -1,22 +1,35 @@
 See my [Travis builds](https://travis-ci.org/deanturpin).
 
 # Travis CI - repo configuration
-## Deploying to GitHub Pages
-In the Travis CI repo settings create a private environment variable "api_key"
-containing your GitHub API key. This replaces the ```${api_key}``` below. All
-branches are built in Travis CI by default but in this example on the master
-branch will be deployed. Deploying for the first time will create a "gh-pages"
-branch and setup the username.github.io/repo static web page.
 
+## C++11 - simple builds
+If you just want to get something building quickly the default Trusty build
+has clang5 pre-installed. No need for complicated matrices.
+
+## C++ builds
+Building for clang 5 and gcc 7. These could be run as separate jobs but it you
+then have to deal with each build trying to deploy.
 ```yaml
-deploy:
-  provider: pages
-  github-token: ${api_key}
-  skip-cleanup: true
-  on:
-    branch: master
-```
+script:
+  - make CXX=clang++-5.0
+  - make clean
+  - make CXX=g++-7
+  - which cppcheck && cppcheck --enable=all . || true
 
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang++-5.0
+            - g++-7
+            - cppcheck
+```
 ## C++ code coverage
 Login to [codecov.io](https://codecov.io/) with your GitHub credentials and
 simply push your coverage files via Travis CI using the generic upload script as
@@ -29,21 +42,21 @@ script:
   - bash <(curl -s https://codecov.io/bash)
 ```
 
-## C++
+## Deploying to GitHub Pages
+In the Travis CI repo settings create a private environment variable "api_key"
+containing your GitHub API key. This replaces the ```${api_key}``` below. All
+branches are built in Travis CI by default but in this example on the master
+branch will be deployed. Deploying for the first time will create a "gh-pages"
+branch and set up the username.github.io/repo static web page. I quite like to
+use this to generated "live" readmes containing recent data.
+
 ```yaml
-dist: trusty
-sudo: false
-language: c++
-
-addons:
-  apt:
-    update: true
-    sources: ubuntu-toolchain-r-test
-    packages: g++-6
-
-script:
-  - make
-  - bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: pages
+  github-token: ${api_key}
+  skip-cleanup: true
+  on:
+    branch: master
 ```
 
 ## bash with dot
@@ -57,6 +70,9 @@ install: sudo apt install graphviz
 language: python
 python: "3.5"
 script: make
+
+# This is implicit
+# pip install -r requirements.txt
 ```
 
 Also need to add ```requirements.txt``` containing a list of libraries:
@@ -98,7 +114,6 @@ curl -s -X POST \
 ```
 
 # Clang format on pre-commit
-
 Global configuration to run clang-format on all C++ files as they are pushed to
 the server. See [githooks](https://github.com/deanturpin/githooks).
 
@@ -109,6 +124,20 @@ for file in $(git diff-index --cached --name-only HEAD); do
     git add "$file"
   fi
 done
+```
+
+# Compiler options
+```bash
+# Standard
+--all-warnings
+--extra-warnings
+-pedantic-errors
+
+# Warnings that are not invoked by all and extra.
+-Wshadow
+-Wfloat-equal
+-Weffc++
+-Wdelete-non-virtual-dtor
 ```
 
 # References
