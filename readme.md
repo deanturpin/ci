@@ -14,7 +14,7 @@ script:
   - make CXX=clang++-5.0
   - make clean
   - make CXX=g++-7
-  - which cppcheck && cppcheck --enable=all . || true
+  - cppcheck --enable=all .
 
 matrix:
   include:
@@ -139,6 +139,9 @@ done
 -Weffc++
 -Wdelete-non-virtual-dtor
 ```
+
+# Uptime monitoring
+See [uptime robot](https://stats.uptimerobot.com/V7YEVs8gv).
 
 # References
 * https://docs.travis-ci.com/user/languages/cpp/
