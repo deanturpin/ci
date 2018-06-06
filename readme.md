@@ -1,19 +1,31 @@
 See my [Travis builds](https://travis-ci.org/deanturpin).
 
 # Travis CI - repo configuration
+Create an account with your GitHub login and enable your repo. (Travis Pro appears to enable new repos by default.)
 
 ## C++11 - simple builds
 If you just want to get something building quickly the default Trusty build
-has clang5 pre-installed. No need for complicated matrices.
+has clang 5 pre-installed: no need for complicated matrices.
+
+Travis config
+```YAML
+script: clang++ --version
+```
+
+Travis build debug
+```bash
+$ clang++ --version
+clang version 5.0.0 (tags/RELEASE_500/final)
+```
 
 ## C++ builds
-Building for clang 5 and gcc 7. These could be run as separate jobs but it you
+Building for clang and gcc. These could be run as separate jobs but you
 then have to deal with each build trying to deploy.
 ```yaml
 script:
-  - make CXX=clang++-5.0
+  - make CXX=clang++-6.0
   - make clean
-  - make CXX=g++-7
+  - make CXX=g++-8
   - cppcheck --enable=all .
 
 matrix:
@@ -24,21 +36,21 @@ matrix:
           update: true
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-5.0
+            - llvm-toolchain-trusty-8.0
           packages:
-            - clang++-5.0
-            - g++-7
+            - clang++-8.0
+            - g++-8
             - cppcheck
 ```
 ## C++ code coverage
 Login to [codecov.io](https://codecov.io/) with your GitHub credentials and
 simply push your coverage files via Travis CI using the generic upload script as
-a build rule. Build your C++ using the gcc ```--coverage``` flag (which uses
-gcov).
+a build rule. Build your C++ using the gcc ```-g --coverage``` flags (which uses
+gcov). Note: I've only managed to get sensible coverage results when compiling with gcc 6.
 
+Having created a Codecov account, call this generic script to push your coverage results.
 ```yaml
 script:
-  - make
   - bash <(curl -s https://codecov.io/bash)
 ```
 
@@ -75,9 +87,24 @@ script: make
 # pip install -r requirements.txt
 ```
 
-Also need to add ```requirements.txt``` containing a list of libraries:
+Also need to add ```requirements.txt``` containing a list of libraries.
 ```bash
 requests
+```
+
+# Linting and profiling
+To use ```gprof```, compile your code with the ```-pg``` flag, run the exe and then process the results as part of your build script.
+```yaml
+script:
+  - make
+  - ./spectrum.o
+  - gprof ./spectrum.o
+```
+
+To run ```cppcheck```, add it to your apt configuration and simply run as a build stage.
+```yaml
+script:
+  - cppcheck --enable=all .
 ```
 
 # Travis CI - triggering builds using the API
@@ -115,7 +142,9 @@ curl -s -X POST \
 
 # Clang format on pre-commit
 Global configuration to run clang-format on all C++ files as they are pushed to
-the server. See [githooks](https://github.com/deanturpin/githooks).
+the server. See [githooks](https://github.com/deanturpin/githooks). Consistency
+is the main thing and when you change your mind you can just run it over the
+code again.
 
 ```bash
 for file in $(git diff-index --cached --name-only HEAD); do
@@ -133,7 +162,7 @@ done
 --extra-warnings
 -pedantic-errors
 
-# Warnings that are not invoked by all and extra.
+# Warnings that are not included by *all* and *extra*
 -Wshadow
 -Wfloat-equal
 -Weffc++
