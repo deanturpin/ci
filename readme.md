@@ -53,6 +53,11 @@ script:
   - bash <(curl -s https://codecov.io/bash)
 ```
 
+## Branch merge
+An unexpected side-effect of using Travis CI is that your branch is automatically built as part of the merge verification.
+
+![](branch_merge.png)
+
 ## Deploying to GitHub Pages
 In the Travis CI repo settings create a private environment variable "api_key"
 containing your GitHub API key. This replaces the ```${api_key}``` below. All
