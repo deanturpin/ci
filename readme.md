@@ -1,11 +1,11 @@
 See my [Travis builds](https://travis-ci.org/deanturpin).
 
 # Travis CI - repo configuration
-Create an account with your GitHub login and enable your repo. (Travis Pro appears to enable new repos by default.)
+Create an account with your GitHub login and enable a repo to get started. (Travis Pro appears to enable new repos by default.)
 
 ## C++11 - simple builds
 If you just want to get something building quickly the default Trusty build
-has clang 5 pre-installed: no need for complicated matrices.
+has clang 5 pre-installed, no need for complicated matrices.
 
 Travis config
 ```YAML
@@ -20,7 +20,7 @@ clang version 5.0.0 (tags/RELEASE_500/final)
 
 ## C++ builds
 Building for clang and gcc. These could be run as separate jobs but you
-then have to deal with each build trying to deploy.
+then have to handle each build attempting to deploy.
 ```yaml
 script:
   - make CXX=clang++-6.0
@@ -43,12 +43,11 @@ matrix:
             - cppcheck
 ```
 ## C++ code coverage
-Login to [codecov.io](https://codecov.io/) with your GitHub credentials and
+Create a [codecov.io](https://codecov.io/) account with your GitHub credentials and
 simply push your coverage files via Travis CI using the generic upload script as
-a build rule. Build your C++ using the gcc ```-g --coverage``` flags (which uses
+a build stage (no need to enable the repo). Build your C++ using the gcc ```-g --coverage``` flags (which invokes
 gcov). Note: I've only managed to get sensible coverage results when compiling with gcc 6.
 
-Having created a Codecov account, call this generic script to push your coverage results.
 ```yaml
 script:
   - bash <(curl -s https://codecov.io/bash)
@@ -141,10 +140,7 @@ curl -s -X POST \
 ```
 
 # Clang format on pre-commit
-Global configuration to run clang-format on all C++ files as they are pushed to
-the server. See [githooks](https://github.com/deanturpin/githooks). Consistency
-is the main thing and when you change your mind you can just run it over the
-code again.
+I use a global git configuration that runs clang-format on all C++ files as they are pushed to the server. See [githooks](https://github.com/deanturpin/githooks). I've changed my mind about coding standards many times over the years, next time I can just create a new format configuration and run it over my code. This also avoids you having to spend time pondering how to format bracket-heavy features like lambdas and initialiser lists.
 
 ```bash
 for file in $(git diff-index --cached --name-only HEAD); do
