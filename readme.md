@@ -167,6 +167,12 @@ done
 -Wfloat-equal
 -Weffc++
 -Wdelete-non-virtual-dtor
+
+# Profiler
+-pg
+
+# Code coverage (gcc only, ignored by clang)
+-g --coverage
 ```
 
 # Uptime monitoring
