@@ -119,7 +119,7 @@ You can configure a hourly cron job via the Travis settings but for more
 frequent builds set up your own cron job on a Linux web server and use the
 Travis API. Note the .org in the API URL, if you use the wrong one (.com) it
 will simply report "access denied". There's a different API key for the Pro
-account too.
+account too. Update ```TOKEN```, ```USERNAME``` and ``` ```REPO``` in the script below (leave the "%2").
 
 ```bash
 # Travis
@@ -133,7 +133,7 @@ body=$(cat <<!
 {
 "request": {
 "branch":"master",
-"message":"cron $(TZ=BST-1 date)"
+"message":"cron $(date)"
 }}
 !
 )
@@ -144,7 +144,7 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token TOKEN" \
   -d "$body" \
-  'https://api.travis-ci.org/repo/USERNAME%2FREPO/requests' >& /dev/null
+  "https://api.travis-ci.org/repo/USERNAME%2FREPO/requests" >& /dev/null
 ```
 
 # Clang format on pre-commit
