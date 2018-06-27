@@ -67,7 +67,7 @@ branch will be deployed. Deploying for the first time will create a "gh-pages"
 branch and set up the username.github.io/repo static web page. I like to
 use this to generate "live" READMEs containing recent data.
 
-Create an API key in your [GitHub settings](https://github.com/settings/tokens).
+Create an API key in your [GitHub settings](https://github.com/settings/tokens), tick "repo" and "admin:public_key".
 
 ```yaml
 deploy:
