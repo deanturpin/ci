@@ -1,5 +1,3 @@
-See my [Travis builds](https://travis-ci.org/deanturpin).
-
 # Travis CI - repo configuration
 Create an account with your GitHub login and enable a repo to get started. (Travis Pro appears to enable new repos by default.)
 
@@ -66,8 +64,10 @@ In the Travis CI repo settings create a private environment variable "api_key"
 containing your GitHub API key. This replaces the ```${api_key}``` below. All
 branches are built in Travis CI by default but in this example on the master
 branch will be deployed. Deploying for the first time will create a "gh-pages"
-branch and set up the username.github.io/repo static web page. I quite like to
-use this to generated "live" readmes containing recent data.
+branch and set up the username.github.io/repo static web page. I like to
+use this to generate "live" READMEs containing recent data.
+
+Create an API key in your [GitHub settings](https://github.com/settings/tokens).
 
 ```yaml
 deploy:
