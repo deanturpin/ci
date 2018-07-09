@@ -162,15 +162,10 @@ done
 # Compiler options
 ```bash
 # Standard
---all-warnings
---extra-warnings
--pedantic-errors
+-std=c++14 --all-warnings --extra-warnings -pedantic-errors
 
 # Warnings that are not included by *all* and *extra*
--Wshadow
--Wfloat-equal
--Weffc++
--Wdelete-non-virtual-dtor
+-Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor
 
 # Profiler
 -pg
