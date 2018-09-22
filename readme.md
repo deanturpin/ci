@@ -165,7 +165,7 @@ done
 --std=c++17 --all-warnings --extra-warnings --pedantic-errors
 
 # Warnings that are not included by *all* and *extra*
--Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor
+-Werror -Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor
 
 # Profiler
 -pg
