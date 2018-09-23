@@ -25,6 +25,7 @@ script:
   - make clean
   - make CXX=g++-8
   - cppcheck --enable=all .
+  - sloccount *.cpp
 
 matrix:
   include:
@@ -39,6 +40,7 @@ matrix:
             - clang++-8.0
             - g++-8
             - cppcheck
+	    - sloccount
 ```
 ## C++ code coverage
 Create a [codecov.io](https://codecov.io/) account with your GitHub credentials and
