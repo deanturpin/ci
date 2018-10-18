@@ -124,11 +124,12 @@ script:
 Also ```sloccount``` can be run to give an insight into the cost of your codebase.
 
 # Travis CI - triggering builds using the API
-You can configure a hourly cron job via the Travis settings but for more
+You can configure a daily cron job via the Travis settings but for more
 frequent builds set up your own cron job on a Linux web server and use the
 Travis API. Note the .org in the API URL, if you use the wrong one (.com) it
 will simply report "access denied". There's a different API key for the Pro
-account too. Update ```TOKEN```, ```USERNAME``` and ``` ```REPO``` in the script below (leave the "%2").
+account too. Update ```TOKEN```, ```USERNAME``` and ``` ```REPO``` in the
+script below (leave the "%2").
 
 ```bash
 # Travis
