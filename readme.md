@@ -87,16 +87,18 @@ install: sudo apt install graphviz
 ```
 
 ## Python with requests
+HTTP requests aren't available by default so you must instruct Travis CI to make it so using an additional "requiredments" file.
 ```yaml
 language: python
-python: "3.5"
+python: "3.6"
 script: make
 
 # This is implicit
 # pip install -r requirements.txt
 ```
 
-Also need to add ```requirements.txt``` containing a list of libraries.
+Add ```requirements.txt``` file to the top level of your repo containing a list
+of dependencies.
 ```bash
 requests
 ```
