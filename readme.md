@@ -40,7 +40,7 @@ matrix:
             - clang++-8.0
             - g++-8
             - cppcheck
-	    - sloccount
+            - sloccount
 ```
 ## C++ code coverage
 Create a [codecov.io](https://codecov.io/) account with your GitHub credentials and
@@ -115,6 +115,8 @@ To run ```cppcheck```, add it to your apt configuration and simply run as a buil
 script:
   - cppcheck --enable=all .
 ```
+
+Also ```sloccount``` can be run to give an insight into the cost of your codebase.
 
 # Travis CI - triggering builds using the API
 You can configure a hourly cron job via the Travis settings but for more
