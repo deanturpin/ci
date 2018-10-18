@@ -66,15 +66,18 @@ In the Travis CI repo settings create a private environment variable "api_key"
 containing your GitHub API key. This replaces the ```${api_key}``` below. All
 branches are built in Travis CI by default but in this example on the master
 branch will be deployed. Deploying for the first time will create a "gh-pages"
-branch and set up the username.github.io/repo static web page. I like to
-use this to generate "live" READMEs containing recent data.
+branch and set up the username.github.io/repo static web page. I like to use
+this to generate "live" READMEs containing recent data.
 
-Create an API key in your [GitHub settings](https://github.com/settings/tokens), tick "repo" and "admin:public_key".
+Create an API key in your [GitHub
+settings](https://github.com/settings/tokens), tick "repo" and
+"admin:public_key". "skip-cleanup" is set to true because you probably want to
+deploy the things you've generated.
 
 ```yaml
 deploy:
   provider: pages
-  github-token: ${api_key}
+  github-token: ${github-token}
   skip-cleanup: true
   on:
     branch: master
