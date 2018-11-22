@@ -141,10 +141,11 @@ script below (leave the "%2").
 
 body=$(cat <<!
 {
-"request": {
-"branch":"master",
-"message":"cron $(date)"
-}}
+  "request": {
+    "branch":"master",
+    "message":"cron $(date)"
+  }
+}
 !
 )
 
