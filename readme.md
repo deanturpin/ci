@@ -90,7 +90,7 @@ install: sudo apt install graphviz
 ```
 
 ## Python with requests
-HTTP requests aren't available by default so you must instruct Travis CI to make it so using an additional "requiredments" file.
+HTTP requests aren't available by default so you must instruct Travis CI to make it so using an additional "requirements" file.
 ```yaml
 language: python
 python: "3.6"
