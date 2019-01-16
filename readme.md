@@ -175,8 +175,11 @@ done
 # Standard
 --std=c++17 --all-warnings --extra-warnings --pedantic-errors
 
-# Warnings that are not included by *all* and *extra*
+# Warnings that are not included by *all* and *extra* but sound like a think we want to know about
 -Werror -Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor
+
+# For the C++17 filesystem library
+-lstdc++fs
 
 # Profiler
 -pg
