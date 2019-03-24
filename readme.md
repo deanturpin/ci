@@ -1,9 +1,10 @@
 # Travis CI - repo configuration
-Create an account with your GitHub login and enable a repo to get started. (Travis Pro appears to enable new repos by default.)
+Create an account with your GitHub login and enable a repo to get started.
+(Travis Pro appears to enable new repos by default.)
 
 ## C++11 - simple builds
-If you just want to get something building quickly the default Trusty build
-has clang 5 pre-installed, no need for complicated matrices.
+If you just want to get something building quickly the default Trusty build has
+clang 5 pre-installed, no need for complicated matrices.
 
 Travis config
 ```YAML
@@ -159,7 +160,13 @@ curl -s -X POST \
 ```
 
 # Clang format on pre-commit
-I use a global git configuration that runs clang-format on all C++ files as they are pushed to the server. See [githooks](https://github.com/deanturpin/githooks). I've changed my mind about coding standards many times over the years, next time I can just create a new format configuration and run it over my code. This also avoids you having to spend time pondering how to format bracket-heavy features like lambdas and initialiser lists.
+I use a global git configuration that runs clang-format on all C++ files as
+they are pushed to the server. See
+[githooks](https://github.com/deanturpin/githooks). I've changed my mind about
+coding standards many times over the years, next time I can just create a new
+format configuration and run it over my code. This also avoids you having to
+spend time pondering how to format bracket-heavy features like lambdas and
+initialiser lists.
 
 ```bash
 for file in $(git diff-index --cached --name-only HEAD); do
@@ -173,9 +180,10 @@ done
 # Compiler options
 ```bash
 # Standard
---std=c++17 --all-warnings --extra-warnings --pedantic-errors
+--std=c++2a --all-warnings --extra-warnings --pedantic-errors
 
-# Warnings that are not included by *all* and *extra* but sound like a think we want to know about
+# Warnings that are not included by *all* and *extra* but sound like a think we
+want to know about
 -Werror -Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor
 
 # For the C++17 filesystem library
