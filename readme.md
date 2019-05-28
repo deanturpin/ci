@@ -44,10 +44,11 @@ matrix:
             - sloccount
 ```
 ## C++ code coverage
-Create a [codecov.io](https://codecov.io/) account with your GitHub credentials and
-simply push your coverage files via Travis CI using the generic upload script as
-a build stage (no need to enable the repo). Build your C++ using the gcc ```-g --coverage``` flags (which invokes
-gcov). Note: I've only managed to get sensible coverage results when compiling with gcc 6.
+Create a [codecov.io](https://codecov.io/) account with your GitHub credentials
+and simply push your coverage files via Travis CI using the generic upload
+script as a build stage (no need to enable the repo). Build your C++ using the
+gcc ```-g --coverage``` flags (which invokes gcov). Note: I've only managed to
+get sensible coverage results when compiling with gcc 6.
 
 ```yaml
 script:
@@ -55,7 +56,8 @@ script:
 ```
 
 ## Branch merge
-An unexpected side-effect of using Travis CI is that your branch is automatically built as part of the merge verification.
+An unexpected side-effect of using Travis CI is that your branch is
+automatically built as part of the merge verification.
 
 ![](branch_merge.png)
 
@@ -101,7 +103,8 @@ install: sudo apt install graphviz
 ```
 
 ## Python with requests
-HTTP requests aren't available by default so you must instruct Travis CI to make it so using an additional "requirements" file.
+HTTP requests aren't available by default so you must instruct Travis CI to
+make it so using an additional "requirements" file.
 ```yaml
 language: python
 python: "3.6"
@@ -118,7 +121,8 @@ requests
 ```
 
 # Linting and profiling
-To use ```gprof```, compile your code with the ```-pg``` flag, run the exe and then process the results as part of your build script.
+To use ```gprof```, compile your code with the ```-pg``` flag, run the exe and
+then process the results as part of your build script.
 ```yaml
 script:
   - make
@@ -126,13 +130,34 @@ script:
   - gprof ./spectrum.o
 ```
 
-To run ```cppcheck```, add it to your apt configuration and simply run as a build stage.
+To run ```cppcheck```, add it to your apt configuration and simply run as a
+build stage.
 ```yaml
 script:
   - cppcheck --enable=all .
 ```
 
-Also ```sloccount``` can be run to give an insight into the cost of your codebase.
+Also ```sloccount``` can be run to give an insight into the cost of your
+codebase.
+
+# Compiler options
+```bash
+# Standard
+--std=c++2a --all-warnings --extra-warnings --pedantic-errors
+
+# Warnings that are not included by *all* and *extra* but sound like a thing we
+# want to know about
+-Werror -Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor \
+-Warray-bounds -Wattribute-alias -Wformat-overflow -Wformat-truncation \
+-Wmissing-attributes -Wstringop-truncation \
+-Wdeprecated-copy -Wclass-conversion \
+
+# Profiler
+-pg
+
+# Code coverage (gcc only, ignored by clang)
+-g --coverage
+```
 
 # Travis CI - triggering builds using the API
 You can configure a daily cron job via the Travis settings but for more
@@ -143,7 +168,6 @@ account too. Update ```TOKEN```, ```USERNAME``` and ``` ```REPO``` in the
 script below (leave the "%2").
 
 ```bash
-# Travis
 @hourly nice ~/trigger.sh
 ```
 
@@ -185,25 +209,6 @@ for file in $(git diff-index --cached --name-only HEAD); do
     git add "$file"
   fi
 done
-```
-
-# Compiler options
-```bash
-# Standard
---std=c++2a --all-warnings --extra-warnings --pedantic-errors
-
-# Warnings that are not included by *all* and *extra* but sound like a think we
-want to know about
--Werror -Wshadow -Wfloat-equal -Weffc++ -Wdelete-non-virtual-dtor
-
-# For the C++17 filesystem library
--lstdc++fs
-
-# Profiler
--pg
-
-# Code coverage (gcc only, ignored by clang)
--g --coverage
 ```
 
 # Uptime monitoring
