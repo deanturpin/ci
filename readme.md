@@ -215,5 +215,5 @@ done
 See [uptime robot](https://stats.uptimerobot.com/V7YEVs8gv).
 
 # References
-* https://docs.travis-ci.com/user/languages/cpp/
-* https://arne-mertz.de/2017/04/continuous-integration-travis-ci/
+* [Travis CI C++ instructions](https://docs.travis-ci.com/user/languages/cpp/)
+* [arne-mertz.de continuous integration](https://arne-mertz.de/2017/04/continuous-integration-travis-ci/)
