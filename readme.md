@@ -84,6 +84,16 @@ deploy:
     branch: master
 ```
 
+# R with packages
+```yaml
+language: R
+install:
+  - R -e "install.packages('rjson')"
+  - R -e "install.packages('rmarkdown')"
+
+script: make
+```
+
 ## bash with dot
 ```yaml
 script: make
