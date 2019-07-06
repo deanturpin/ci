@@ -77,6 +77,8 @@ settings](https://github.com/settings/tokens), tick "repo" and
 "admin:public_key". "skip-cleanup" is set to true because you probably want to
 deploy the things you've generated.
 
+Finally, in your GitHub repo settings ensure the GitHub Pages section "source" is gh-pages branch.
+
 ```yaml
 deploy:
   provider: pages
