@@ -90,6 +90,7 @@ deploy:
 ```yaml
 language: R
 install:
+  - R -e "install.packages('csv')"
   - R -e "install.packages('rjson')"
   - R -e "install.packages('rmarkdown')"
 
