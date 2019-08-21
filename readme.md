@@ -155,6 +155,9 @@ codebase.
 -Wmissing-attributes -Wstringop-truncation \
 -Wdeprecated-copy -Wclass-conversion \
 
+# And a whisper of optimisation
+-O1
+
 # Profiler
 -pg
 
